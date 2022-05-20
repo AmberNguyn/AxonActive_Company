@@ -14,11 +14,12 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/departmentlocations")
 public class DepartmentLocationResource {
     private final DepartmentLocationService departmentLocationService;
     private final DepartmentLocationRepository departmentLocationRepository;
 
-    @GetMapping("/department_locations")
+    @GetMapping("/list")
     public List<DepartmentLocation> getAllDepartmentLocation() {
         List<DepartmentLocation> allDepartmentLocations = departmentLocationService.getAll();
         return allDepartmentLocations;
@@ -33,7 +34,7 @@ public class DepartmentLocationResource {
 
     //R - retrieve
     @GetMapping("/get/{id}")
-    public ResponseEntity<DepartmentLocation> getDepartmentLocationById(@RequestParam Integer id) throws ResourceNotFoundException {
+    public ResponseEntity<DepartmentLocation> getDepartmentLocationById(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
         DepartmentLocation departmentLocation = departmentLocationService.findDepartmentLocationById(id)
                 .orElseThrow(
                         () -> new ResourceNotFoundException("User not found: " + id)

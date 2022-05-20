@@ -14,11 +14,12 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/employees")
 public class EmployeeResource {
     private final EmployeeService employeeService;
     private final EmployeeRepository employeeRepository;
 
-    @GetMapping("/employees")
+    @GetMapping("/list")
     public List<Employee> getAllEmployees() {
         List<Employee> allEmployees = employeeService.getAll();
         return allEmployees;

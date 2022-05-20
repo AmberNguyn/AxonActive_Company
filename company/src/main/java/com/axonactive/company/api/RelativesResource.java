@@ -13,10 +13,11 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/relatives")
 public class RelativesResource {
     private final RelativesService relativesService;
 
-    @GetMapping("/relatives")
+    @GetMapping("/list")
     public List<Relatives> getAllRelatives() {
         List<Relatives> allRelatives = relativesService.getAll();
         return allRelatives;

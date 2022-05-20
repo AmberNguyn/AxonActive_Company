@@ -15,11 +15,12 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/department")
 public class DepartmentResource {
     private final DepartmentService departmentService;
     private final DepartmentRepository departmentRepository;
 
-    @GetMapping("/department")
+    @GetMapping("/list")
     public List<Department> getAllDepartment() {
         List<Department> allDepartments = departmentService.getAll();
         return allDepartments;
@@ -33,7 +34,7 @@ public class DepartmentResource {
 
     // R - retrieve
     @GetMapping("/get/{id}")
-    public ResponseEntity<Department> getDepartmentById(@RequestParam Integer id) throws ResourceNotFoundException {
+    public ResponseEntity<Department> getDepartmentById(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
         Department department = departmentRepository.findById(id)
                 .orElseThrow(
                         () -> new ResourceNotFoundException("User not found on: " + id));
@@ -45,7 +46,7 @@ public class DepartmentResource {
 
     //D - delete
     @DeleteMapping("/delete/{id}")
-    public Map<String, Boolean> deleteDepartmentById(@RequestParam Integer id) throws Exception {
+    public Map<String, Boolean> deleteDepartmentById(@PathVariable(value = "id") Integer id) throws Exception {
         Department department = departmentRepository.findById(id)
                 .orElseThrow(()
                         -> new ResourceNotFoundException("Department not found: " + id

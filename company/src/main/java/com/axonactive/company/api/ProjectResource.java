@@ -13,10 +13,11 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/projects")
 public class ProjectResource {
     private final ProjectService projectService;
 
-    @GetMapping("/projects")
+    @GetMapping("/list")
     public List<Project> getAllProjects() {
         List<Project> projects = projectService.getAll();
         return projects;

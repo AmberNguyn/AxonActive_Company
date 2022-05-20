@@ -14,10 +14,11 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/assignments")
 public class AssignmentResource {
     private final AssignmentService assignmentService;
 
-    @GetMapping("/assignments")
+    @GetMapping("/list")
     public List<Assignment> getAllAssignment()
     {
         List<Assignment> allAssignments = assignmentService.getAll();
