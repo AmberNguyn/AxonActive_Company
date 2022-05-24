@@ -2,6 +2,7 @@ package com.axonactive.company.api;
 
 import com.axonactive.company.entity.Assignment;
 import com.axonactive.company.exception.ResourceNotFoundException;
+import com.axonactive.company.repository.AssignmentRepository;
 import com.axonactive.company.service.AssignmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.expression.spel.ast.Assign;
@@ -17,6 +18,7 @@ import java.util.Map;
 @RequestMapping("/assignments")
 public class AssignmentResource {
     private final AssignmentService assignmentService;
+    private final AssignmentRepository assignmentRepository;
 
     @GetMapping("/list")
     public List<Assignment> getAllAssignment()
@@ -44,6 +46,21 @@ public class AssignmentResource {
     }
 
     //U - update
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Assignment> updateAssignment(@RequestBody Assignment newAssignment, @PathVariable(value = "id") Integer id) throws ResourceNotFoundException
+    {
+        Assignment assignment = assignmentService.findAssignmentById(id)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Id " + id + " not found")
+                );
+        assignment.setEmployee(newAssignment.getEmployee());
+        assignment.setProject(newAssignment.getProject());
+        assignment.setNumberOfHour(newAssignment.getNumberOfHour());
+        Assignment updatedAssignment = assignmentRepository.save(assignment);
+
+        return ResponseEntity.ok(updatedAssignment);
+    }
+
 
     //D - delete
     @DeleteMapping("delete/{id}")

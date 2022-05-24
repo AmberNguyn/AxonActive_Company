@@ -33,6 +33,29 @@ public class EmployeeResource {
     }
 
     //U - update
+    @PutMapping("update/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "id") Integer id, @RequestBody Employee newEmployee)
+        throws ResourceNotFoundException
+    {
+        Employee employee = employeeService.findEmployeeById(id)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Id not found")
+                );
+        employee.setEmployeeIdFake(newEmployee.getEmployeeIdFake());
+        employee.setDepartment(newEmployee.getDepartment());
+        employee.setGender(newEmployee.getGender());
+        employee.setFirstName(newEmployee.getFirstName());
+        employee.setDateOfBirth(newEmployee.getDateOfBirth());
+        employee.setLastName(newEmployee.getLastName());
+        employee.setMiddleName(newEmployee.getMiddleName());
+        Employee updatedEmployee = employeeRepository.save(employee);
+        return ResponseEntity.ok(updatedEmployee);
+    }
+
+
+
+
+
 
     //R - retrieve
     @GetMapping("/get/{id}")

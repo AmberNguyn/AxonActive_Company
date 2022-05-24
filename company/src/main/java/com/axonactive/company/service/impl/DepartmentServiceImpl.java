@@ -32,8 +32,20 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentRepository.findById(id);
     }
 
+    @Override
+    public List<Department> findDepartmentByDepartmentNameIs(String departmentName) {
+        return departmentRepository.findDepartmentByDepartmentNameIs(departmentName);
+    }
+
+    @Override
+    public List<Department> findDepartmentByStartDateIsNotNull()
+    {
+        return departmentRepository.findDepartmentByStartDateIsNotNull();
+    }
+
 
     //U - update
+
 
     //D - delete
     @Override

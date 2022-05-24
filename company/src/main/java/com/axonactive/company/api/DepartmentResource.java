@@ -7,6 +7,7 @@ import com.axonactive.company.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +44,17 @@ public class DepartmentResource {
     }
 
     //U - update
+    @PutMapping("update/{id}")
+    public ResponseEntity<Department> updateDepartment(@RequestBody Department newDepartment, @PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
+        Department department = departmentService.findDepartmentById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found: " + id));
+
+        department.setDepartmentName(newDepartment.getDepartmentName());
+        department.setStartDate(newDepartment.getStartDate());
+        Department updatedDepartment = departmentRepository.save(department);
+        return ResponseEntity.ok(updatedDepartment);
+    }
+
 
     //D - delete
     @DeleteMapping("/delete/{id}")

@@ -37,6 +37,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     //U - update
 
+
+
+
+
+
+
+
+
     //D - delete
     @Override
     public void deleteEmployee(String id) {
@@ -89,24 +97,21 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findEmployeeByDateOfBirthBefore(date);
     }
 
-//    @Override
-//    public List<Employee> findEmployeeByAgeLessThan(int age) {
-//        List<Employee> smallerthanAgeList = new ArrayList<>();
-//        for (Employee em: employeeRepository.findAll()){
-//           if( LocalDate.now().getYear() - em.getDateOfBirth().getYear() < age){
-//               smallerthanAgeList.add(em);
-//           }
-//
-//        }
-//
-//
-//        return smallerthanAgeList;
-//    }
+    @Override
+    public List<Employee> findEmployeeByDateOfBirthBetween(LocalDate startingDate, LocalDate endingDate) {
+        return employeeRepository.findEmployeeByDateOfBirthBetween(startingDate, endingDate);
+    }
 
-//    public List<Employee> findEmployeeBySalaryOrderByLastNameDesc(Integer salary)
-//    {
-//        return employeeRepository.findEmployeeBySalaryOrderByLastNameDesc(salary);
-//    }
+
+
+
+
+
+    @Override
+    public List<Employee> findEmployeeBySalaryOrderByLastNameDesc(Integer salary)
+    {
+        return employeeRepository.findEmployeeBySalaryOrderByLastNameDesc(salary);
+    }
 
 
 }

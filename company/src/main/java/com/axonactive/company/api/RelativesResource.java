@@ -1,7 +1,9 @@
 package com.axonactive.company.api;
 
+import com.axonactive.company.entity.Employee;
 import com.axonactive.company.entity.Relatives;
 import com.axonactive.company.exception.ResourceNotFoundException;
+import com.axonactive.company.repository.RelativesRepository;
 import com.axonactive.company.service.RelativesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import java.util.Map;
 @RequestMapping("/relatives")
 public class RelativesResource {
     private final RelativesService relativesService;
+    private final RelativesRepository relativesRepository;
 
     @GetMapping("/list")
     public List<Relatives> getAllRelatives() {
@@ -40,6 +43,23 @@ public class RelativesResource {
         return ResponseEntity.ok().body(relatives);
     }
     //U - update
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Relatives> updateRelatives(@RequestBody Relatives newRelatives, @PathVariable(value = "id") Integer id) throws ResourceNotFoundException
+    {
+        Relatives relatives = relativesService.findRelativeById(id)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Id " + id + " not found" )
+                );
+        relatives.setRelationship(newRelatives.getRelationship());
+        relatives.setFullName(newRelatives.getFullName());
+        relatives.setPhoneNumber(newRelatives.getPhoneNumber());
+        relatives.setGender(newRelatives.getGender());
+        Relatives updatedRelative = relativesRepository.save(relatives);
+
+        return ResponseEntity.ok(updatedRelative);
+    }
+
+
 
     //D - delete
     @DeleteMapping("/delete/{id}")

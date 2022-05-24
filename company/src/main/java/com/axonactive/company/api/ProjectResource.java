@@ -2,6 +2,7 @@ package com.axonactive.company.api;
 
 import com.axonactive.company.entity.Project;
 import com.axonactive.company.exception.ResourceNotFoundException;
+import com.axonactive.company.repository.ProjectRepository;
 import com.axonactive.company.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.Map;
 @RequestMapping("/projects")
 public class ProjectResource {
     private final ProjectService projectService;
+    private final ProjectRepository projectRepository;
 
     @GetMapping("/list")
     public List<Project> getAllProjects() {
@@ -39,6 +41,20 @@ public class ProjectResource {
         return ResponseEntity.ok().body(project);
     }
     //U - update
+    @PutMapping("/{id}")
+    public ResponseEntity<Project> updateProject(@RequestBody Project newProject, @PathVariable(value = "id") Integer id) throws ResourceNotFoundException
+    {
+        Project project = projectService.findProjectById(id)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Id not found" + id)
+                );
+        project.setProjectName(newProject.getProjectName());
+        project.setDepartment(newProject.getDepartment());
+        project.setArea(newProject.getArea());
+        Project updatedProject = projectRepository.save(project);
+        return ResponseEntity.ok(updatedProject);
+
+    }
 
     //D - delete
     @DeleteMapping("/delete/{id}")

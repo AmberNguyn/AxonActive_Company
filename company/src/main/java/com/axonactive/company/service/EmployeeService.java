@@ -33,9 +33,10 @@ public interface EmployeeService {
 
     public List<Employee> findEmployeeByDateOfBirthBefore(LocalDate date);
 
-//    public List<Employee> findEmployeeByAgeLessThan(int age);
+    public List<Employee> findEmployeeBySalaryOrderByLastNameDesc(Integer salary);
 
-//    public List<Employee> findEmployeeBySalaryOrderByLastNameDesc(Integer salary);
+    public List<Employee> findEmployeeByDateOfBirthBetween(LocalDate startingDate, LocalDate endingDate);
+
 
 
     //U - update

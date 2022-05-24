@@ -27,8 +27,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
     List<Employee> findEmployeeByDateOfBirthBefore(LocalDate date);
 
-//    List<Employee> findEmployeeByAgeLessThan(int age);
+    List<Employee> findEmployeeBySalaryOrderByLastNameDesc(Integer salary);
 
-//    List<Employee> findEmployeeBySalaryOrderByLastNameDesc(Integer salary);
+    List<Employee> findEmployeeByDateOfBirthBetween(LocalDate startingDate, LocalDate endingDate);
 }
 

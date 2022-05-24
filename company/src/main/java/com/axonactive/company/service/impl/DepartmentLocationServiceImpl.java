@@ -33,6 +33,20 @@ public class DepartmentLocationServiceImpl implements DepartmentLocationService 
     {
         return departmentLocationRepository.findById(id);
     }
+
+    @Override
+    public List<DepartmentLocation> findDepartmentLocationByDepartmentDepartmentId(Integer deptId)
+    {
+        return departmentLocationRepository.findDepartmentLocationByDepartmentDepartmentId(deptId);
+    }
+
+
+
+
+
+
+
+
     //U - update
 
     //D - delete

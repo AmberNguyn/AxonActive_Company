@@ -53,6 +53,5 @@ public class Employee {
     @JoinColumn(name = "department_id")
     private Department department;
 
-//    @Transient
-//    private int age ;
+
 }

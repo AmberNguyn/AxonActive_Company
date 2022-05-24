@@ -44,6 +44,21 @@ public class DepartmentLocationResource {
 
     //U - update
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<DepartmentLocation> updateDepartmentLocation(@PathVariable(value = "id") Integer id,
+                                                                       @RequestBody DepartmentLocation newDepartmentLocation)
+            throws ResourceNotFoundException {
+        DepartmentLocation departmentLocation = departmentLocationService.findDepartmentLocationById(id)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Id not found" + id)
+                );
+        departmentLocation.setLocation(newDepartmentLocation.getLocation());
+        departmentLocation.setDepartment(newDepartmentLocation.getDepartment());
+        DepartmentLocation updatedDepartmentLocation = departmentLocationRepository.save(departmentLocation);
+        return ResponseEntity.ok(updatedDepartmentLocation);
+    }
+
+
     //D - delete
     @DeleteMapping("/delete/{id}")
     public Map<String, Boolean> deleteDepartmentLocationById(@PathVariable(value = "id") Integer id) throws Exception {

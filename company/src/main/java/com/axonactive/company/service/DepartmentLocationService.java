@@ -13,6 +13,15 @@ public interface DepartmentLocationService {
 
     //R - retrieve
     public Optional<DepartmentLocation> findDepartmentLocationById(Integer id);
+
+    public List<DepartmentLocation> findDepartmentLocationByDepartmentDepartmentId(Integer deptId);
+
+
+
+
+
+
+
     //U - update
 
     //D - delete by Id
