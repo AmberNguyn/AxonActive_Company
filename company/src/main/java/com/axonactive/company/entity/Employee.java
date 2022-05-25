@@ -30,23 +30,23 @@ public class Employee {
 
     private LocalDate dateOfBirth;
 
-    @NotNull
+
     @Size(min = 1, max = 20)
     private String firstName;
 
     @Enumerated(EnumType.STRING)
-    @NotNull
+
     private Gender gender;
 
-    @NotNull
+
     @Size(min = 1, max = 20)
     private String lastName;
 
-    @NotNull
+
     @Size(min = 1, max = 20)
     private String middleName;
 
-    @NotNull
+
     private Integer salary;
 
     @ManyToOne

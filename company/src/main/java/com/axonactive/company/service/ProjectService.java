@@ -13,6 +13,23 @@ public interface ProjectService {
 
     //R - retrieve
     public Optional<Project> findProjectById(Integer id);
+
+    public List<Project> findProjectByAreaOrderByProjectName(String area);
+
+    public Optional<Project> findProjectByProjectName(String projectName);
+
+    public List<Project> findProjectByDepartmentDepartmentId(Integer departmentId);
+
+    public List<Project> findProjectByDepartmentDepartmentName(String departmentName);
+
+//    List<Project> findProjectByAreaContaining(String area);
+
+
+
+
+
+
+
     //U - update
 
     //D - delete

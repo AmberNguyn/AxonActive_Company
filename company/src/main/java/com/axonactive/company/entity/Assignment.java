@@ -20,7 +20,7 @@ public class Assignment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer assignmentId;
 
-    @NotNull
+
     private Integer numberOfHour;
 
     @ManyToOne

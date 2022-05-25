@@ -20,11 +20,11 @@ public class Project {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Integer projectId;
 
-    @NotNull
+
     @Size(min = 0, max= 100)
     private String area;
 
-    @NotNull
+
     @Size(min = 0, max = 100)
     private String projectName;
 

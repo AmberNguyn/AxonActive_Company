@@ -34,6 +34,35 @@ public class ProjectServiceImpl implements ProjectService {
         return projectRepository.findById(id);
     }
 
+    @Override
+    public List<Project> findProjectByAreaOrderByProjectName(String area)
+    {
+        return projectRepository.findProjectByAreaOrderByProjectName(area);
+    }
+
+    @Override
+    public Optional<Project> findProjectByProjectName(String projectName)
+    {
+        return projectRepository.findProjectByProjectName(projectName);
+    }
+
+    @Override
+    public List<Project> findProjectByDepartmentDepartmentId(Integer departmentId)
+    {
+        return projectRepository.findProjectByDepartmentDepartmentId(departmentId);
+    }
+
+    @Override
+    public List<Project> findProjectByDepartmentDepartmentName(String departmentName)
+    {
+        return projectRepository.findProjectByDepartmentDepartmentName(departmentName);
+    }
+
+//    List<Project> findProjectByAreaContaining(String area);
+
+
+
+
     //U - update
 
     //D - delete

@@ -11,12 +11,12 @@ public interface DepartmentLocationRepository extends JpaRepository<DepartmentLo
 
     List<DepartmentLocation> findDepartmentLocationByDepartmentDepartmentId(Integer deptId);
 
-//    List<DepartmentLocation> findDepartmentLocationByLocation(String location);
+    List<DepartmentLocation> findDepartmentLocationByLocation(String location);
 
-//    List<DepartmentLocation> findDepartmentLocationByLocationStartingWith(String text);
+    List<DepartmentLocation> findDepartmentLocationByLocationStartingWith(String text);
 
-//    List<DepartmentLocation> findDepartmentLocationByLocationNot(String text);
+    List<DepartmentLocation> findDepartmentLocationByLocationNot(String text);
 
-//    List<DepartmentLocation> findDepartmentLocationByLocationOrderByDepartmentIdDesc();
+    List<DepartmentLocation> findDepartmentLocationByLocationOrderByDepartmentDepartmentIdDesc(String location);
 
 }

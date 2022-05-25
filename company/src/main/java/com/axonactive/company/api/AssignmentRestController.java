@@ -5,7 +5,6 @@ import com.axonactive.company.exception.ResourceNotFoundException;
 import com.axonactive.company.repository.AssignmentRepository;
 import com.axonactive.company.service.AssignmentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.expression.spel.ast.Assign;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +14,13 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/assignments")
-public class AssignmentResource {
+@RequestMapping(AssignmentRestController.PATH)
+public class AssignmentRestController {
     private final AssignmentService assignmentService;
     private final AssignmentRepository assignmentRepository;
+    public static final String PATH = "api/assignments";
 
-    @GetMapping("/list")
+    @GetMapping
     public List<Assignment> getAllAssignment()
     {
         List<Assignment> allAssignments = assignmentService.getAll();
@@ -35,7 +35,7 @@ public class AssignmentResource {
     }
 
     //R - retrieve
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Assignment> getAssignmentById(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException
     {
         Assignment assignment = assignmentService.findAssignmentById(id)
@@ -46,7 +46,7 @@ public class AssignmentResource {
     }
 
     //U - update
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Assignment> updateAssignment(@RequestBody Assignment newAssignment, @PathVariable(value = "id") Integer id) throws ResourceNotFoundException
     {
         Assignment assignment = assignmentService.findAssignmentById(id)
@@ -63,7 +63,7 @@ public class AssignmentResource {
 
 
     //D - delete
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     public Map<String, Boolean> deleteAssignmentById(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException
     {
         Assignment assignment = assignmentService.findAssignmentById(id)

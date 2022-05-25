@@ -16,6 +16,13 @@ public interface DepartmentLocationService {
 
     public List<DepartmentLocation> findDepartmentLocationByDepartmentDepartmentId(Integer deptId);
 
+    public List<DepartmentLocation> findDepartmentLocationByLocation(String location);
+
+    public List<DepartmentLocation> findDepartmentLocationByLocationStartingWith(String text);
+
+    public List<DepartmentLocation> findDepartmentLocationByLocationNot(String text);
+
+    public List<DepartmentLocation> findDepartmentLocationByLocationOrderByDepartmentDepartmentIdDesc(String location);
 
 
 

@@ -1,6 +1,5 @@
 package com.axonactive.company.api;
 
-import com.axonactive.company.entity.Employee;
 import com.axonactive.company.entity.Relatives;
 import com.axonactive.company.exception.ResourceNotFoundException;
 import com.axonactive.company.repository.RelativesRepository;
@@ -15,12 +14,13 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/relatives")
-public class RelativesResource {
+@RequestMapping(RelativesRestController.PATH)
+public class RelativesRestController {
     private final RelativesService relativesService;
     private final RelativesRepository relativesRepository;
+    public static final String PATH = "api/relatives";
 
-    @GetMapping("/list")
+    @GetMapping()
     public List<Relatives> getAllRelatives() {
         List<Relatives> allRelatives = relativesService.getAll();
         return allRelatives;
@@ -34,7 +34,7 @@ public class RelativesResource {
     }
 
     //R - retrieve
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Relatives> getRelativeById(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
         Relatives relatives = relativesService.findRelativeById(id)
                 .orElseThrow(
@@ -43,7 +43,7 @@ public class RelativesResource {
         return ResponseEntity.ok().body(relatives);
     }
     //U - update
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Relatives> updateRelatives(@RequestBody Relatives newRelatives, @PathVariable(value = "id") Integer id) throws ResourceNotFoundException
     {
         Relatives relatives = relativesService.findRelativeById(id)
@@ -62,7 +62,7 @@ public class RelativesResource {
 
 
     //D - delete
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public Map<String, Boolean> deleteRelativeById(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
         Relatives relatives = relativesService.findRelativeById(id)
                 .orElseThrow(

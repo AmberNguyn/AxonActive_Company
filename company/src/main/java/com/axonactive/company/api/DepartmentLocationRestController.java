@@ -14,12 +14,13 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/departmentlocations")
-public class DepartmentLocationResource {
+@RequestMapping(DepartmentLocationRestController.PATH)
+public class DepartmentLocationRestController {
     private final DepartmentLocationService departmentLocationService;
     private final DepartmentLocationRepository departmentLocationRepository;
+    public static final String PATH = "api/departmentLocations";
 
-    @GetMapping("/list")
+    @GetMapping()
     public List<DepartmentLocation> getAllDepartmentLocation() {
         List<DepartmentLocation> allDepartmentLocations = departmentLocationService.getAll();
         return allDepartmentLocations;
@@ -33,7 +34,7 @@ public class DepartmentLocationResource {
     }
 
     //R - retrieve
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<DepartmentLocation> getDepartmentLocationById(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
         DepartmentLocation departmentLocation = departmentLocationService.findDepartmentLocationById(id)
                 .orElseThrow(
@@ -44,7 +45,7 @@ public class DepartmentLocationResource {
 
     //U - update
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<DepartmentLocation> updateDepartmentLocation(@PathVariable(value = "id") Integer id,
                                                                        @RequestBody DepartmentLocation newDepartmentLocation)
             throws ResourceNotFoundException {
@@ -60,7 +61,7 @@ public class DepartmentLocationResource {
 
 
     //D - delete
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public Map<String, Boolean> deleteDepartmentLocationById(@PathVariable(value = "id") Integer id) throws Exception {
         DepartmentLocation departmentLocation = departmentLocationService.findDepartmentLocationById(id)
                 .orElseThrow(

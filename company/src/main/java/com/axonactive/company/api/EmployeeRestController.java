@@ -14,12 +14,13 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/employees")
-public class EmployeeResource {
+@RequestMapping(EmployeeRestController.PATH)
+public class EmployeeRestController {
     private final EmployeeService employeeService;
     private final EmployeeRepository employeeRepository;
+    public static final String PATH = "api/employees";
 
-    @GetMapping("/list")
+    @GetMapping("")
     public List<Employee> getAllEmployees() {
         List<Employee> allEmployees = employeeService.getAll();
         return allEmployees;
@@ -33,7 +34,7 @@ public class EmployeeResource {
     }
 
     //U - update
-    @PutMapping("update/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "id") Integer id, @RequestBody Employee newEmployee)
         throws ResourceNotFoundException
     {
@@ -58,7 +59,7 @@ public class EmployeeResource {
 
 
     //R - retrieve
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
         Employee employee = employeeService.findEmployeeById(id)
                 .orElseThrow(
@@ -69,7 +70,7 @@ public class EmployeeResource {
 
 
     //D - delete
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public Map<String, Boolean> deleteEmployeeById(@PathVariable(value = "id") Integer id) throws Exception {
         Employee employee = employeeService.findEmployeeById(id)
                 .orElseThrow(

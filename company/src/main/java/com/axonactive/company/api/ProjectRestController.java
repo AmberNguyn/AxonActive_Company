@@ -14,12 +14,13 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/projects")
-public class ProjectResource {
+@RequestMapping(ProjectRestController.PATH)
+public class ProjectRestController {
     private final ProjectService projectService;
     private final ProjectRepository projectRepository;
+    public static final String PATH = "api/projects";
 
-    @GetMapping("/list")
+    @GetMapping()
     public List<Project> getAllProjects() {
         List<Project> projects = projectService.getAll();
         return projects;
@@ -32,7 +33,7 @@ public class ProjectResource {
     }
 
     //R - retrieve
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Project> getProjectById(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
         Project project = projectService.findProjectById(id)
                 .orElseThrow(
@@ -57,7 +58,7 @@ public class ProjectResource {
     }
 
     //D - delete
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public Map<String, Boolean> deleteProjectById(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
         Project project = projectService.findProjectById(id)
                 .orElseThrow(

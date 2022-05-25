@@ -7,21 +7,20 @@ import com.axonactive.company.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.ResourceAccessException;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/department")
-public class DepartmentResource {
+@RequestMapping(DepartmentRestController.PATH)
+public class DepartmentRestController {
     private final DepartmentService departmentService;
     private final DepartmentRepository departmentRepository;
+    public static final String PATH = "api/department";
 
-    @GetMapping("/list")
+    @GetMapping("")
     public List<Department> getAllDepartment() {
         List<Department> allDepartments = departmentService.getAll();
         return allDepartments;
@@ -34,7 +33,7 @@ public class DepartmentResource {
     }
 
     // R - retrieve
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Department> getDepartmentById(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
         Department department = departmentRepository.findById(id)
                 .orElseThrow(
@@ -44,7 +43,7 @@ public class DepartmentResource {
     }
 
     //U - update
-    @PutMapping("update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Department> updateDepartment(@RequestBody Department newDepartment, @PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
         Department department = departmentService.findDepartmentById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found: " + id));
@@ -57,7 +56,7 @@ public class DepartmentResource {
 
 
     //D - delete
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public Map<String, Boolean> deleteDepartmentById(@PathVariable(value = "id") Integer id) throws Exception {
         Department department = departmentRepository.findById(id)
                 .orElseThrow(()
